@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math/rand"
+	"time"
+)
 
 type deck []string
 
@@ -22,5 +26,20 @@ func CreateDeck() deck {
 func (d deck) Print() {
 	for i, cs := range d {
 		fmt.Printf("%v - %v\n", i, cs)
+	}
+}
+
+func (d deck) Shuffle() {
+	for i, _ := range d {
+		// Generating a random generator from a dynamic seed
+		s := rand.NewSource(time.Now().UnixNano())
+		r := rand.New(s)
+
+		// Getting a random card (rc) from the deck with a random index (ri)
+		ri := r.Intn(len(d) - 1)
+		rc := d[ri]
+
+		// Shuffling the cards
+		d[i], d[ri] = rc, d[i]
 	}
 }
