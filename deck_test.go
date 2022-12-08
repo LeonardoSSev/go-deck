@@ -31,3 +31,18 @@ func TestCreateDeck(t *testing.T) {
 		t.Errorf("The last card of the deck should be %v, got %v", elc, ldc)
 	}
 }
+
+func TestShuffle(t *testing.T) {
+	d := CreateDeck()
+	d2 := CreateDeck()
+
+	d.Shuffle()
+	d2.Shuffle()
+
+	das := getDeckAsString(d)
+	das2 := getDeckAsString(d2)
+
+	if das == das2 {
+		t.Error("The decks should not be equal")
+	}
+}
