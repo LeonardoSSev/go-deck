@@ -60,3 +60,18 @@ func SaveDeck(filename string, d deck) {
 func getDeckAsString(d deck) string {
 	return strings.Join(d, ",")
 }
+
+func ImportDeck(filename string) deck {
+	dab, err := os.ReadFile(filename)
+
+	if err != nil {
+		fmt.Printf("Error: %v\n", err.Error())
+		os.Exit(1)
+	}
+
+	return getDeckFromString(string(dab))
+}
+
+func getDeckFromString(das string) deck {
+	return strings.Split(das, ",")
+}
