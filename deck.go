@@ -75,3 +75,7 @@ func ImportDeck(filename string) deck {
 func getDeckFromString(das string) deck {
 	return strings.Split(das, ",")
 }
+
+func Deal(d deck, hs int) (deck, deck) {
+	return d[:hs], d[hs:]
+}
