@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"math/rand"
+	"os"
+	"strings"
 	"time"
 )
 
@@ -42,4 +44,19 @@ func (d deck) Shuffle() {
 		// Shuffling the cards
 		d[i], d[ri] = rc, d[i]
 	}
+}
+
+func SaveDeck(filename string, d deck) {
+	das := getDeckAsString(d)
+
+	err := os.WriteFile(filename, []byte(das), 0666)
+
+	if err != nil {
+		fmt.Printf("Error: %v\n", err.Error())
+		os.Exit(1)
+	}
+}
+
+func getDeckAsString(d deck) string {
+	return strings.Join(d, ",")
 }
