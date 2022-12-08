@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"testing"
 )
 
@@ -44,5 +45,19 @@ func TestShuffle(t *testing.T) {
 
 	if das == das2 {
 		t.Error("The decks should not be equal")
+	}
+}
+
+func TestSaveDeck(t *testing.T) {
+	filename := "mydeck.txt"
+	_ = os.Remove(filename)
+
+	d := CreateDeck()
+	SaveDeck(filename, d)
+
+	_, err := os.ReadFile(filename)
+
+	if err != nil {
+		t.Error("Deck not saved")
 	}
 }
