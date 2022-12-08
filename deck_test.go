@@ -61,3 +61,20 @@ func TestSaveDeck(t *testing.T) {
 		t.Error("Deck not saved")
 	}
 }
+
+func TestImportDeck(t *testing.T) {
+	filename := "mydeck.txt"
+	_ = os.Remove(filename)
+
+	d := CreateDeck()
+	SaveDeck(filename, d)
+
+	d2 := ImportDeck(filename)
+
+	das := getDeckAsString(d)
+	das2 := getDeckAsString(d2)
+
+	if das != das2 {
+		t.Error("Deck not imported properly")
+	}
+}
